@@ -15,4 +15,19 @@ return [
     'timeout' => env('ZOHAL_TIMEOUT', 30),
     'retry_attempts' => env('ZOHAL_RETRY_ATTEMPTS', 3),
     'retry_delay' => env('ZOHAL_RETRY_DELAY', 1000),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for API authentication
+    |
+    */
+
+    'auth' => [
+        'enabled' => env('ZOHAL_AUTH_ENABLED', true),
+        'guard' => env('ZOHAL_AUTH_GUARD', 'api'),
+        'middleware' => env('ZOHAL_AUTH_MIDDLEWARE', 'auth:api'),
+    ],
 ];

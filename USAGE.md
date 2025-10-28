@@ -27,6 +27,11 @@ ZOHAL_TOKEN=your_api_token_here
 ZOHAL_TIMEOUT=30
 ZOHAL_RETRY_ATTEMPTS=3
 ZOHAL_RETRY_DELAY=1000
+
+# Authentication settings (optional)
+ZOHAL_AUTH_ENABLED=true
+ZOHAL_AUTH_GUARD=api
+ZOHAL_AUTH_MIDDLEWARE=auth:api
 ```
 
 ## Usage
@@ -42,19 +47,43 @@ POST /api/v1/inquiry/{method}
 
 Where `{method}` can be any valid inquiry method (e.g., `shahkar`).
 
+**Authentication:** By default, all API routes require authentication. You can configure this behavior in the `zohal.php` config file or using environment variables.
+
+#### Authentication Configuration
+
+The package supports configurable authentication:
+
+- **Enable/Disable:** Set `ZOHAL_AUTH_ENABLED` to `false` to disable authentication
+- **Guard:** Configure which authentication guard to use with `ZOHAL_AUTH_GUARD` (default: `api`)
+- **Middleware:** Customize the middleware with `ZOHAL_AUTH_MIDDLEWARE` (default: `auth:api`)
+
+Example to disable authentication:
+```env
+ZOHAL_AUTH_ENABLED=false
+```
+
+Example to use a different guard:
+```env
+ZOHAL_AUTH_GUARD=web
+ZOHAL_AUTH_MIDDLEWARE=auth:web
+```
+
 
 #### Example API Request
 
-**Dynamic Inquiry Request:**
+**Dynamic Inquiry Request (with authentication):**
 ```bash
 curl -X POST http://your-app.com/api/v1/inquiry/shahkar \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
+  -H "Authorization: Bearer your-api-token" \
   -d '{
     "national_code": "1234567890",
     "mobile": "09123456789"
   }'
 ```
+
+**Note:** Include the appropriate authentication header based on your configured guard (Bearer token for API guard, session cookie for web guard, etc.).
 
 #### Example API Response
 

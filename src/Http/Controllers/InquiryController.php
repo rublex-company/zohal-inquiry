@@ -5,6 +5,7 @@ namespace Inquiry\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
 use Inquiry\Services\ZohalInquiryService;
 
 class InquiryController
@@ -30,6 +31,8 @@ class InquiryController
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
                 'request_id' => $request->header('X-Request-ID') ?? uniqid('req_', true),
+                'user_id' => Auth::id(),
+                'authenticated' => Auth::check(),
             ];
 
             // Call the dynamic method on the service
