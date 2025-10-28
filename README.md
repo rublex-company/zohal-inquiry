@@ -35,13 +35,19 @@ composer require rublex/laravel-zohal-inquiry
 php artisan vendor:publish --provider="Inquiry\ZohalServiceProvider" --tag="zohal-config"
 ```
 
-2. Add your Zohal API credentials to your `.env` file:
+2. Publish the database migrations (optional):
+```bash
+php artisan vendor:publish --provider="Inquiry\ZohalServiceProvider" --tag="zohal-migrations"
+php artisan migrate
+```
+
+3. Add your Zohal API credentials to your `.env` file:
 ```env
 ZOHAL_BASE_URL=https://service.zohal.io/api/v0/services
 ZOHAL_TOKEN=your_api_token_here
 ```
 
-3. Use the package in your code:
+4. Use the package in your code:
 ```php
 use Inquiry\Facades\Zohal;
 

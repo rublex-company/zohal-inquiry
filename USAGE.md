@@ -14,7 +14,13 @@ composer require rublex/laravel-zohal-inquiry
 php artisan vendor:publish --provider="Inquiry\ZohalServiceProvider" --tag="zohal-config"
 ```
 
-3. Add your Zohal API credentials to your `.env` file:
+3. Publish the database migrations (optional):
+```bash
+php artisan vendor:publish --provider="Inquiry\ZohalServiceProvider" --tag="zohal-migrations"
+php artisan migrate
+```
+
+4. Add your Zohal API credentials to your `.env` file:
 ```env
 ZOHAL_BASE_URL=https://service.zohal.io/api/v0/services
 ZOHAL_TOKEN=your_api_token_here
@@ -99,6 +105,50 @@ $result = Zohal::inquiry('shahkar', [
 ]);
 
 ```
+
+## Database Migrations
+
+The package includes optional database migrations for logging inquiry requests. These migrations create an `inquiry_logs` table to track:
+
+- **Request Details**: Method, endpoint, request data, response data
+- **Response Information**: Status code, response status, error messages
+- **Performance Metrics**: Response time in milliseconds
+- **Request Tracking**: IP address, user agent, request ID for correlation
+- **Timestamps**: Created and updated timestamps for audit trails
+
+### Migration Features
+
+- **Comprehensive Logging**: Captures all inquiry requests and responses
+- **Performance Monitoring**: Tracks response times for performance analysis
+- **Error Tracking**: Logs error messages and status codes for debugging
+- **Indexed Queries**: Optimized database indexes for efficient querying
+- **Request Correlation**: Unique request IDs for tracking related requests
+
+### Publishing Migrations
+
+To enable inquiry logging, publish and run the migrations:
+
+```bash
+php artisan vendor:publish --provider="Inquiry\ZohalServiceProvider" --tag="zohal-migrations"
+php artisan migrate
+```
+
+This will create the `inquiry_logs` table with the following structure:
+
+- `id` - Primary key
+- `method` - Inquiry method name (indexed)
+- `endpoint` - API endpoint URL (indexed)
+- `request_data` - JSON data of the request payload
+- `response_data` - JSON data of the response payload
+- `status_code` - HTTP status code
+- `response_status` - Response status (success, error, timeout, etc.)
+- `error_message` - Error message if any
+- `response_time_ms` - Response time in milliseconds
+- `ip_address` - Client IP address (IPv6 support)
+- `user_agent` - Client user agent string
+- `request_id` - Unique request identifier (indexed)
+- `created_at` - Request timestamp
+- `updated_at` - Last update timestamp
 
 ## Configuration
 
