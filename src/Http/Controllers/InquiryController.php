@@ -25,8 +25,15 @@ class InquiryController
             // Get all parameters from request body
             $parameters = $request->all();
 
+            // Prepare request context for logging
+            $requestContext = [
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'request_id' => $request->header('X-Request-ID') ?? uniqid('req_', true),
+            ];
+
             // Call the dynamic method on the service
-            $result = $this->zohalService->callInquiryMethod($method, $parameters);
+            $result = $this->zohalService->callInquiryMethod($method, $parameters, $requestContext);
 
             return Response::json([
                 'result' => true,

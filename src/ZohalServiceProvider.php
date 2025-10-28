@@ -29,6 +29,11 @@ class ZohalServiceProvider extends ServiceProvider
             __DIR__ . '/../config/zohal.php' => config_path('zohal.php'),
         ], 'zohal-config');
 
+        // Publish migrations
+        $this->publishes([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'zohal-migrations');
+
         // Load routes
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
     }

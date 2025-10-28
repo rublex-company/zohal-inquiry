@@ -23,7 +23,9 @@
     "illuminate/contracts": "*",
     "illuminate/http": "*",
     "illuminate/config": "*",
-    "illuminate/console": "*"
+    "illuminate/console": "*",
+    "illuminate/database": "*",
+    "illuminate/eloquent": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "*"
