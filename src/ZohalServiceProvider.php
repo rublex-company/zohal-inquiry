@@ -26,7 +26,7 @@ class ZohalServiceProvider extends ServiceProvider
     {
         // Publish config file
         $this->publishes([
-            __DIR__ . '/../config/zohal.php' => config_path('zohal.php'),
+            __DIR__ . '/config/zohal.php' => config_path('zohal.php'),
         ], 'zohal-config');
 
         // Publish migrations
@@ -49,7 +49,7 @@ class ZohalServiceProvider extends ServiceProvider
 
         // Merge config
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/zohal.php', 'zohal'
+            __DIR__ . '/config/zohal.php', 'zohal'
         );
     }
 
