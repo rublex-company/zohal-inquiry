@@ -1,6 +1,7 @@
 {
   "name": "rublex/laravel-zohal-inquiry",
   "description": "A Laravel package for Zohal inquiry services",
+  "version": "1.0.0",
   "keywords": [
     "rublex",
     "zohal",
