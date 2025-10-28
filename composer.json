@@ -1,0 +1,41 @@
+{
+  "name": "rublex/laravel-zohal-inquiry",
+  "description": "A Laravel package for Zohal inquiry services",
+  "keywords": [
+    "rublex",
+    "zohal",
+    "inquiry",
+    "laravel",
+    "api"
+  ],
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Inquiry\\": "src/"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0.1",
+    "illuminate/support": "*",
+    "illuminate/container": "*",
+    "illuminate/contracts": "*",
+    "illuminate/http": "*",
+    "illuminate/config": "*",
+    "illuminate/console": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Inquiry\\ZohalServiceProvider"
+      ],
+      "aliases": {
+        "Zohal": "Inquiry\\Facades\\Zohal"
+      }
+    }
+  }
+}
